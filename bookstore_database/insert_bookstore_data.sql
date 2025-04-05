@@ -33,4 +33,3 @@ INSERT INTO `OrderDetails` (`OrderID`, `ISBN`, `Quantity`) VALUES
 (1, '9781234567890', 1),
 (1, '9780321765723', 2),
 (2, '9780743273565', 1);
-
