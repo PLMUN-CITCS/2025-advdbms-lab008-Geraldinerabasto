@@ -1,50 +1,38 @@
-CREATE DATABASE `BookstoreDB`;
-
 USE `BookstoreDB`;
 
--- Books Table [cite: 11]
-CREATE TABLE `Books` (
-   `ISBN` VARCHAR(20) PRIMARY KEY,
-   `Title` VARCHAR(255) NOT NULL,
-   `Price` DECIMAL(10,2) NOT NULL
-);
+-- Insert into Books
+INSERT INTO `Books` (`ISBN`, `Title`, `Price`) VALUES
+('9781234567890', 'The Hitchhiker''s Guide to the Galaxy', 7.99),
+('9780321765723', 'The Lord of the Rings', 12.99),
+('9780743273565', 'Pride and Prejudice', 9.99);
 
--- Authors Table [cite: 11]
-CREATE TABLE `Authors` (
-   `AuthorID` INT PRIMARY KEY,
-   `Name` VARCHAR(255) NOT NULL
-);
+-- Insert into Authors
+INSERT INTO `Authors` (`AuthorID`, `Name`) VALUES
+(1, 'Douglas Adams'),
+(2, 'J.R.R. Tolkien'),
+(3, 'Jane Austen');
 
--- BookAuthors Table (Associative Entity) [cite: 11]
-CREATE TABLE `BookAuthors` (
-   `ISBN` VARCHAR(20),
-   `AuthorID` INT,
-   PRIMARY KEY (`ISBN`, `AuthorID`),
-   FOREIGN KEY (`ISBN`) REFERENCES `Books`(`ISBN`),
-   FOREIGN KEY (`AuthorID`) REFERENCES `Authors`(`AuthorID`)
-);
+-- Insert into BookAuthors
+INSERT INTO `BookAuthors` (`ISBN`, `AuthorID`) VALUES
+('9781234567890', 1),
+('9780321765723', 2),
+('9780743273565', 3);
 
--- Customers Table [cite: 11]
-CREATE TABLE `Customers` (
-   `CustomerID` INT PRIMARY KEY,
-   `Name` VARCHAR(255) NOT NULL,
-   `Email` VARCHAR(255) NOT NULL
-);
+-- Insert into Customers
+INSERT INTO `Customers` (`CustomerID`, `Name`, `Email`) VALUES
+(1, 'John Doe', 'john.doe@example.com'),
+(2, 'Jane Smith', 'jane.smith@example.com'),
+(3, 'David Lee', 'david.lee@example.com');
 
--- Orders Table [cite: 11]
-CREATE TABLE `Orders` (
-   `OrderID` INT PRIMARY KEY,
-   `CustomerID` INT,
-   `OrderDate` DATE NOT NULL,
-   FOREIGN KEY (`CustomerID`) REFERENCES `Customers`(`CustomerID`)
-);
+-- Insert into Orders
+INSERT INTO `Orders` (`OrderID`, `CustomerID`, `OrderDate`) VALUES
+(1, 1, '2024-07-26'),
+(2, 2, '2024-07-27'),
+(3, 3, '2024-07-28');
 
--- OrderDetails Table [cite: 11]
-CREATE TABLE `OrderDetails` (
-   `OrderID` INT,
-   `ISBN` VARCHAR(20),
-   `Quantity` INT NOT NULL,
-   PRIMARY KEY (`OrderID`, `ISBN`),
-   FOREIGN KEY (`OrderID`) REFERENCES `Orders`(`OrderID`),
-   FOREIGN KEY (`ISBN`) REFERENCES `Books`(`ISBN`)
-);
+-- Insert into OrderDetails
+INSERT INTO `OrderDetails` (`OrderID`, `ISBN`, `Quantity`) VALUES
+(1, '9781234567890', 1),
+(1, '9780321765723', 2),
+(2, '9780743273565', 1);
+
